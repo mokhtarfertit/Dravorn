@@ -589,3 +589,38 @@ classDiagram
     LLMModel --> ReportGenerator : analysis
     ReportGenerator --> User : final report
 ```
+## activity Diagram 
+```mermaid
+---
+config:
+  theme: mc
+  layout: elk
+---
+flowchart TB
+    Start(("Start")) --> Target[/"Enter authorized target"/]
+    Target --> Scan["Run security scan"]
+    Scan --> Results["Collect ports, services, and technologies"]
+    Results --> Analyze["Identify potential vulnerabilities"]
+    Analyze --> Knowledge[("Retrieve CVE/CWE security knowledge")]
+    Knowledge --> AI["AI explains and prioritizes findings"]
+    AI --> Report[/"Generate security report"/]
+    Report --> View["User views report"]
+    View --> Finish(("Finish"))
+    n1["Text Block"]
+
+    n1@{ shape: text}
+     Start:::startFinish
+     Target:::inputOutput
+     Scan:::process
+     Results:::process
+     Analyze:::process
+     Knowledge:::knowledge
+     AI:::process
+     Report:::inputOutput
+     View:::process
+     Finish:::startFinish
+    classDef startFinish fill:#f0fdf4,stroke:#4ade80,stroke-width:2px
+    classDef inputOutput fill:#ecfeff,stroke:#22d3ee,stroke-width:2px
+    classDef process fill:#eef2ff,stroke:#818cf8,stroke-width:2px
+    classDef knowledge fill:#f5f3ff,stroke:#a78bfa,stroke-width:2px
+```
