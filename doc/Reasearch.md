@@ -624,3 +624,73 @@ flowchart TB
     classDef process fill:#eef2ff,stroke:#818cf8,stroke-width:2px
     classDef knowledge fill:#f5f3ff,stroke:#a78bfa,stroke-width:2px
 ```
+# PROJCET STRUCTURE 
+```text
+ai-vulnerability-scanner/
+│
+├── README.md
+├── requirements.txt
+├── .env.example
+├── .gitignore
+│
+├── config/
+│   └── config.yaml
+│
+├── src/
+│   ├── main.py
+│   │
+│   ├── agent/
+│   │   ├── __init__.py
+│   │   └── orchestrator.py
+│   │
+│   ├── scanner/
+│   │   ├── __init__.py
+│   │   └── nmap_scanner.py
+│   │
+│   ├── analyzer/
+│   │   ├── __init__.py
+│   │   └── vulnerability_analyzer.py
+│   │
+│   ├── rag/
+│   │   ├── __init__.py
+│   │   ├── retriever.py
+│   │   ├── embeddings.py
+│   │   └── knowledge_base.py
+│   │
+│   ├── llm/
+│   │   ├── __init__.py
+│   │   └── model.py
+│   │
+│   ├── report/
+│   │   ├── __init__.py
+│   │   └── report_generator.py
+│   │
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── scan_result.py
+│   │   └── vulnerability.py
+│   │
+│   └── utils/
+│       ├── __init__.py
+│       └── logger.py
+│
+├── data/
+│   ├── knowledge/
+│   └── vector_db/
+│
+├── reports/
+│
+├── tests/
+│   ├── test_scanner.py
+│   ├── test_analyzer.py
+│   ├── test_rag.py
+│   └── test_report.py
+│
+└── docs/
+    ├── architecture.md
+    └── uml/
+        ├── use-case.md
+        ├── class-diagram.md
+        └── sequence-diagram.md
+
+```
