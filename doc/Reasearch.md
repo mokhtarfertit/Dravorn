@@ -544,7 +544,7 @@ The objective is to keep the architecture simple enough to implement while demon
 
 # UML 
 ## Classe diagram 
-
+```mermaid
 ---
 config:
   theme: mc
@@ -588,3 +588,4 @@ classDiagram
     KnowledgeBase --> LLMModel : security context
     LLMModel --> ReportGenerator : analysis
     ReportGenerator --> User : final report
+```
