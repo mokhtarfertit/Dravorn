@@ -311,7 +311,8 @@ The project should use a modular architecture with clear separation between:
 | Vulnerability Information | CVE / NVD / CWE              |
 | RAG                       | FAISS or Chroma              |
 | Embeddings                | Sentence Transformers        |
-| AI Model                  | Local/Open-Source LLM or API |
+| AI Model                  | Local/ or API                |
+|                           | Qwen3-4B-Cybersecurity                       
 | Backend                   | FastAPI                      |
 | Database                  | SQLite                       |
 | Report Format             | Markdown / HTML / PDF        |
@@ -624,7 +625,7 @@ flowchart TB
     classDef process fill:#eef2ff,stroke:#818cf8,stroke-width:2px
     classDef knowledge fill:#f5f3ff,stroke:#a78bfa,stroke-width:2px
 ```
-# PROJCET STRUCTURE 
+# PROJECT STRUCTURE 
 ```text
 ai-vulnerability-scanner/
 │
