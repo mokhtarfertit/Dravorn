@@ -1,0 +1,32 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Test/cache
+.pytest_cache/
+.coverage
+
+# Logs
+*.log
+
+# Generated reports
+reports/
+
+# OS files
+.DS_Store
+Thumbs.db
