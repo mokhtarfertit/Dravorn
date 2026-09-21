@@ -54,13 +54,16 @@ def validate_target(raw_target: str, authorized: bool) -> AuthorizedTarget:
 
     try:
         address = ipaddress.ip_address(target)
+    except ValueError:
+        address = None
+
+    if address is not None:
         validate_resolved_address(str(address))
         return AuthorizedTarget(
             value=str(address),
             kind=TargetKind.IP_ADDRESS,
         )
-    except ValueError:
-        pass
+    
 
     normalized_domain = target.lower()
 
