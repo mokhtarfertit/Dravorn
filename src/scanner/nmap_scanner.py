@@ -20,7 +20,7 @@ class NmapParseError(ValueError):
 class NmapExecutionError(RuntimeError):
     """Raised when Nmap cannot run or returns an error."""
 
-
+# this function just reads Nmap XML already produced
 def parse_nmap_xml(xml_text: str, target: str) -> ScanResult:
     """Convert Nmap XML output into Dravorn's scan-result model."""
     try:
