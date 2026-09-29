@@ -1,5 +1,11 @@
 from __future__ import annotations
 
+import re
+from datetime import datetime, timezone
+from pathlib import Path
+
+
+
 from src.models.scan_result import ScanResult
 from src.models.vulnerability import VulnerabilityFinding
 
@@ -85,3 +91,24 @@ def generate_markdown_report(
     )
 
     return "\n".join(lines)
+
+def save_markdown_report(
+    report_content: str,
+    output_directory: Path,
+    target: str,
+) -> Path:
+    """Save a generated Markdown report and return its file path."""
+    output_directory.mkdir(parents=True, exist_ok=True)
+
+    safe_target = re.sub(r"[^A-Za-z0-9._-]+", "_", target)
+    safe_target = safe_target.strip("._") or "target"
+
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
+    report_path = output_directory / (
+        f"report_{safe_target}_{timestamp}.md"
+    )
+
+    report_path.write_text(report_content, encoding="utf-8")
+
+    return report_path

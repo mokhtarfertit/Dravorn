@@ -7,10 +7,14 @@ from src.analyzer.vulnerability_analyzer import analyze_scan
 from src.scanner.nmap_scanner import NmapExecutionError, run_nmap_scan
 from src.utils.target_validator import TargetValidationError, validate_target
 
+from src.report.report_generator import (
+    generate_markdown_report,
+    save_markdown_report,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 ADVISORY_PATH = PROJECT_ROOT / "data" / "knowledge" / "advisories.json"
-
+REPORTS_DIRECTORY = PROJECT_ROOT / "reports"
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
