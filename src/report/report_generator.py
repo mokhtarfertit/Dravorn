@@ -73,6 +73,11 @@ def generate_markdown_report(
                     "",
                     finding.remediation,
                     "",
+                                        "#### AI-Assisted Explanation",
+                    "",
+                    finding.ai_explanation
+                    or "No AI explanation was generated.",
+                    "",
                 ]
             )
 
