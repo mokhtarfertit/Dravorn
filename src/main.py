@@ -6,6 +6,7 @@ from pathlib import Path
 from src.analyzer.vulnerability_analyzer import analyze_scan
 from src.scanner.nmap_scanner import NmapExecutionError, run_nmap_scan
 from src.utils.target_validator import TargetValidationError, validate_target
+from src.llm.model import LLMClientError, LocalLLMClient
 
 from src.report.report_generator import (
     generate_markdown_report,
@@ -85,6 +86,35 @@ def main() -> int:
             scan_result=scan_result,
             advisory_path=ADVISORY_PATH,
         )
+        if findings:
+            try:
+                llm_client = LocalLLMClient.from_environment()
+
+                for finding in findings:
+                    service = next(
+                        (
+                            item
+                            for item in scan_result.services
+                            if item.port == finding.service_port
+                            and item.protocol == finding.service_protocol
+                        ),
+                        None,
+                    )
+
+                    if service is None:
+                        print(
+                            f"Skipping AI explanation for '{finding.title}': "
+                            "related service was not found."
+                        )
+                        continue
+
+                    finding.ai_explanation = llm_client.explain_finding(
+                        finding,
+                        service,
+                    )
+
+            except LLMClientError as error:
+                print(f"AI explanation was skipped: {error}")
     except (OSError, ValueError, KeyError, AttributeError) as error:
         parser.error(f"Could not analyze scan results: {error}")
         return 2
