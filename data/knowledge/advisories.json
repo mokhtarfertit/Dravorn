@@ -1,0 +1,13 @@
+{
+  "advisories": [
+    {
+      "id": "DRV-DEMO-001",
+      "product": "DemoHTTP",
+      "affected_versions": ["1.0.0"],
+      "title": "DemoHTTP 1.0.0 requires security review",
+      "severity": "medium",
+      "description": "This is fake data used only to test the project.",
+      "remediation": "Upgrade DemoHTTP and review its security information."
+    }
+  ]
+}
