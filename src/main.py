@@ -121,6 +121,23 @@ def main() -> int:
 
     print(f"\nPotential findings: {len(findings)}")
 
+    try:
+        report_content = generate_markdown_report(
+            scan_result=scan_result,
+            findings=findings,
+        )
+
+        report_path = save_markdown_report(
+            report_content=report_content,
+            output_directory=REPORTS_DIRECTORY,
+            target=scan_result.target,
+        )
+
+    except OSError as error:
+        parser.error(f"Could not save report: {error}")
+        return 2
+
+    print(f"\nReport saved: {report_path}")
     if not findings:
         print("No local advisory matched the detected product versions.")
         return 0

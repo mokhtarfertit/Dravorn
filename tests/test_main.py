@@ -56,7 +56,18 @@ def test_main_adds_ai_explanation_to_a_finding(monkeypatch):
             assert service.version == "1.0.0"
 
             return "Fake AI explanation for the test."
+    def fake_generate_markdown_report(scan_result, findings):
+        assert scan_result.target == "example.com"
+        assert findings[0].ai_explanation == "Fake AI explanation for the test."
 
+        return "# Fake Dravorn report"
+
+
+    def fake_save_markdown_report(report_content, output_directory, target):
+        assert report_content == "# Fake Dravorn report"
+        assert target == "example.com"
+
+        return output_directory / "report_example.com_test.md"
     monkeypatch.setattr(
         dravorn_main,
         "validate_target",
@@ -84,7 +95,19 @@ def test_main_adds_ai_explanation_to_a_finding(monkeypatch):
         ["dravorn", "example.com", "--authorized", "--scan"],
     )
 
+    monkeypatch.setattr(
+        dravorn_main,
+        "generate_markdown_report",
+        fake_generate_markdown_report,
+    )
+    monkeypatch.setattr(
+        dravorn_main,
+        "save_markdown_report",
+        fake_save_markdown_report,
+    )
+
     result = dravorn_main.main()
 
     assert result == 0
     assert finding.ai_explanation == "Fake AI explanation for the test."
+
